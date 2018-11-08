@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: lightgreen;
+    color: darkslategrey;
+    justify-content: center;
+}
+
+#result {
+    color: black;
+    font-size: 50px;
+    font-style: italic;
+}
+
+.game {
+    margin: 15%;
+    width: 100%;
+}

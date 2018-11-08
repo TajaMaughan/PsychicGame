@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="game">
+        <div>To begin: Choose a letter.</div>
+        <div>Guesses remaining: <span id="guessTotal">10</span></div>
+        <div>Guessed letters: <span id="guessed"></span></div>
+        <div>Wins: <span id="wins"></span></div>
+        <div>Loses: <span id="loses"></span></div>
+        <div><span id="result"></span></div>
+
+    </div>
+    <script>
+        var compOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        var letter;
+        var userGuess;
+        var guessTotal = 10;
+        var wins = 0;
+        var loses = 0;
+        var alreadyGuessed;
+
+        function randomLetter() {
+            letter = compOptions[Math.floor(Math.random() * compOptions.length)];
+            console.log(letter);
+            return letter;
+        }
+
+        function gameReset() {
+            guessTotal = 10;
+            alreadyGuessed = " "
+            $("#guessTotal").html(guessTotal);
+            $("#guessed").html(alreadyGuessed)
+            randomLetter();
+        }
+
+        $(document).ready(function () {
+            randomLetter();
+            document.onkeyup = function guess(event) {
+                var userGuess = event.key;
+
+                if (userGuess === letter) {
+                    wins++;
+                    $("#wins").html(wins);
+                    $("#result").html("You win!");
+                    gameReset();
+                }
+                else if (userGuess !== letter && guessTotal > 1) {
+                    guessTotal--;
+                    alreadyGuessed = event.key + " ";
+                    $("#guessed").append(alreadyGuessed)
+                    $("#guessTotal").html(guessTotal);
+                }
+                else {
+                    guessTotal--;
+                    loses++;
+                    $("#guessTotal").html(guessTotal);
+                    $("#loses").html(loses);
+                    $("#result").html("You lose.")
+                    gameReset();
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
